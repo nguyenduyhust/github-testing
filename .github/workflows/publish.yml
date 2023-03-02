@@ -50,4 +50,5 @@ jobs:
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
           TAG=$(npm version ${{ inputs.bump }} --preid ${{ inputs.preid }})
+          git push origin
           git push origin $TAG
