@@ -10,8 +10,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.actor }}
   cancel-in-progress: true
 
-env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 jobs:
   create-release:
@@ -21,6 +20,8 @@ jobs:
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release - ${{ github.ref_name }}
