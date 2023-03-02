@@ -45,15 +45,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: "Config npm"
-        id: config-npm
-        run: |
-          npm set @gulabs:registry=https://npm.pkg.github.com
-          npm set //npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}
-          npm set @gusdk:registry=https://test.gusdk.gu.net
-          npm set test.gusdk.gu.net/:_authToken=${{ secrets.GUSDK_TEST_NPM_TOKEN }}
       - run: npm install
-      - run: npm run bootstrap
       - name: Version
         run: |
           git config user.name ${{ github.actor }}
