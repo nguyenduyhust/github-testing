@@ -1,7 +1,7 @@
 name: Create release
 run-name: Create release ${{ github.ref_name }} by @${{ github.actor }}
-# on: workflow_dispatch
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*'
