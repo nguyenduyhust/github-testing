@@ -1,0 +1,1020 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GUchain-lib specification - v0.11.0</title>
+	<meta name="description" content="Documentation for GUchain-lib specification - v0.11.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">GUchain-lib specification - v0.11.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>GUchain-lib specification - v0.11.0</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#guchain-lib" id="guchain-lib" style="color: inherit; text-decoration: none;">
+					<h1>guchain-lib</h1>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<pre><code><span style="color: #001080">$</span><span style="color: #000000"> </span><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">gulabs</span><span style="color: #000000">/</span><span style="color: #001080">guchain</span><span style="color: #000000">-</span><span style="color: #001080">lib</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">GUchain</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;guchain&quot;</span><span style="color: #000000">);</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">guchain</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">GUchain</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">provider:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;amazon&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">region:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;ap-northeast-1&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">accessKeyId:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;********&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">secretAccessKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;********&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// create VPC</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">vpc</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createVpc</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;My first VPC&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">vpcCidr:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;10.10.0.0/16&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">subnetCidrs:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;10.10.10.0/24&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;10.10.100.0/24&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// create global security groups</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">networkAclId</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createNetworkAcl</span><span style="color: #000000">(</span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;0.0.0.0/0&#039;</span><span style="color: #000000">); </span><span style="color: #008000">// ChainManager Public IP || all</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">nodeP2pAclId</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createPeerToPeerAcl</span><span style="color: #000000">(</span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// create node</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">node</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createNode</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">vpcId:</span><span style="color: #000000"> </span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">blockInterval:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">gasLimit:</span><span style="color: #000000"> </span><span style="color: #098658">470000000</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">gethVersion:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1.9.15&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">networkId:</span><span style="color: #000000"> </span><span style="color: #098658">26100</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">imageId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ami-06cd52961ce9f0d85&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">instanceType:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;t2.small&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">allocAddress:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;855d916ea475f1abf47ead100d85118c5cbed36e&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">allocBalance:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;0x200000000000000000000000000000000000000000000000000000000000000&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">networkAclGroupId:</span><span style="color: #000000"> </span><span style="color: #001080">networkAclId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">nodeP2pAclGroup:</span><span style="color: #000000"> </span><span style="color: #001080">nodeP2pAclId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">cloudWatchProfileName:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Cloudwatch role name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// create endpoint (load balancer)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">endpointUuid</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;xxxx&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">lb</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createEndpoint</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">vpcId:</span><span style="color: #000000"> </span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">networkAclGroupId:</span><span style="color: #000000"> </span><span style="color: #001080">networkAclId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">endpointUuid:</span><span style="color: #000000"> </span><span style="color: #001080">endpointUuid</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">hostedZoneId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Route53 DNS host zone ID&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">sslCertArn:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ACM certificate arn&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">addNodeToEndpoint</span><span style="color: #000000">(</span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointLoadBalancerId</span><span style="color: #000000">, </span><span style="color: #001080">node</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// create blockscout</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">blockscout</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">createBlockscout</span><span style="color: #000000">(</span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointUrls</span><span style="color: #000000">[</span><span style="color: #098658">0</span><span style="color: #000000">]!, {</span>
+<span style="color: #000000">    </span><span style="color: #001080">vpcId:</span><span style="color: #000000"> </span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">imageId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ami-06cd52961ce9f0d85&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">instanceType:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;t2.small&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">networkAclGroupId:</span><span style="color: #000000"> </span><span style="color: #001080">networkAclId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">cloudWatchProfileName:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Cloudwatch role name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">addBlockscoutToEndpoint</span><span style="color: #000000">(</span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointLoadBalancerId</span><span style="color: #000000">, </span><span style="color: #001080">blockscout</span><span style="color: #000000">.</span><span style="color: #001080">instanceId</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// delete blockscout, node, endpoint</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">removeNodeFromEndpoint</span><span style="color: #000000">(</span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointLoadBalancerId</span><span style="color: #000000">, </span><span style="color: #001080">node</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">removeBlockscoutFromEndpoint</span><span style="color: #000000">(</span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointLoadBalancerId</span><span style="color: #000000">, </span><span style="color: #001080">blockscout</span><span style="color: #000000">.</span><span style="color: #001080">instanceId</span><span style="color: #000000">);</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deleteEndpoint</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">endpointLoadBalancerId:</span><span style="color: #000000"> </span><span style="color: #001080">lb</span><span style="color: #000000">.</span><span style="color: #001080">endpointLoadBalancerId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">endpointUuid:</span><span style="color: #000000"> </span><span style="color: #001080">endpointUuid</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">hostedZoneId:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Route53 DNS host zone ID&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deleteNode</span><span style="color: #000000">(</span><span style="color: #001080">node</span><span style="color: #000000">.</span><span style="color: #001080">id</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deleteBlockscout</span><span style="color: #000000">(</span><span style="color: #001080">blockscout</span><span style="color: #000000">.</span><span style="color: #001080">instanceId</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// delete security groups, vpc</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deletePeerToPeerAcl</span><span style="color: #000000">(</span><span style="color: #001080">nodeP2pAclId</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deleteNetworkAcl</span><span style="color: #000000">(</span><span style="color: #001080">networkAclId</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">guchain</span><span style="color: #000000">.</span><span style="color: #795E26">deleteVpc</span><span style="color: #000000">({ </span><span style="color: #001080">vpcId:</span><span style="color: #000000"> </span><span style="color: #001080">vpc</span><span style="color: #000000">.</span><span style="color: #001080">vpcId</span><span style="color: #000000"> });</span>
+</code></pre>
+				<a href="#createvpc-parameters" id="createvpc-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createVpc parameters</h2>
+				</a>
+				<p>Name|Type|Required|Default|Desciption
+					----|----|----|----|----|----|----
+					name|string|Yes|-|VPC name
+					vpcCidr|string|Yes|-|VPC CIDR
+				subnetCidrs|string[]|Yes|-|List of subnet CIDR</p>
+				<a href="#createvpc-output" id="createvpc-output" style="color: inherit; text-decoration: none;">
+					<h2>createVpc output</h2>
+				</a>
+				<p>Name|Type|Desciption
+					----|----|----|----|----
+					vpcId|string|VPC ID
+				subnetIds|string|List of subnet ID</p>
+				<a href="#createnetworkacl-parameters" id="createnetworkacl-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createNetworkAcl parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+						<tr>
+							<td>managerCidrIp</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ChainManager CIDR or all (0.0.0.0/0)</td>
+						</tr>
+				</tbody></table>
+				<a href="#createnetworkacl-output" id="createnetworkacl-output" style="color: inherit; text-decoration: none;">
+					<h2>createNetworkAcl output</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>-</td>
+							<td>string</td>
+							<td>Security group ID for ChainManager</td>
+						</tr>
+				</tbody></table>
+				<a href="#createpeertopeeracl-parameters" id="createpeertopeeracl-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createPeerToPeerAcl parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+						<tr>
+							<td>initialCidrIps?</td>
+							<td>string[]</td>
+							<td>No</td>
+							<td>[]</td>
+							<td>List of allow IP</td>
+						</tr>
+				</tbody></table>
+				<a href="#createpeertopeeracl-output" id="createpeertopeeracl-output" style="color: inherit; text-decoration: none;">
+					<h2>createPeerToPeerAcl output</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>-</td>
+							<td>string</td>
+							<td>Security group ID for P2P connection</td>
+						</tr>
+				</tbody></table>
+				<a href="#createnode-parameters" id="createnode-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createNode parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+						<tr>
+							<td>allocAddress</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Alloc address</td>
+						</tr>
+						<tr>
+							<td>allocBalance</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Alloc balance</td>
+						</tr>
+						<tr>
+							<td>blockInterval</td>
+							<td>number</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Block creation interval</td>
+						</tr>
+						<tr>
+							<td>dataVolumeSize?</td>
+							<td>number</td>
+							<td>No</td>
+							<td>20</td>
+							<td>Disk volume size</td>
+						</tr>
+						<tr>
+							<td>initialSignerAddresses?</td>
+							<td>string[]</td>
+							<td>No</td>
+							<td>signerAddress</td>
+							<td>List of initial validator address</td>
+						</tr>
+						<tr>
+							<td>gasLimit</td>
+							<td>number</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>GAS limit</td>
+						</tr>
+						<tr>
+							<td>gethVersion</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Geth version</td>
+						</tr>
+						<tr>
+							<td>maxPeers?</td>
+							<td>number</td>
+							<td>No</td>
+							<td>50</td>
+							<td>Max peer number</td>
+						</tr>
+						<tr>
+							<td>networkId</td>
+							<td>number</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Blockchain network ID</td>
+						</tr>
+						<tr>
+							<td>imageId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 AMI ID</td>
+						</tr>
+						<tr>
+							<td>instanceType</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance size</td>
+						</tr>
+						<tr>
+							<td>signerAddress?</td>
+							<td>string</td>
+							<td>No</td>
+							<td>generate new</td>
+							<td>Validator address</td>
+						</tr>
+						<tr>
+							<td>signerPrivateKey?</td>
+							<td>string</td>
+							<td>No</td>
+							<td>generate new</td>
+							<td>Validator private key</td>
+						</tr>
+						<tr>
+							<td>networkAclGroupId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security group ID for ChainManager</td>
+						</tr>
+						<tr>
+							<td>nodeP2pAclGroup</td>
+							<td>IGUPeerToPeerAclInfo</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security group ID for P2P connection</td>
+						</tr>
+						<tr>
+							<td>cloudWatchProfileName</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Cloudwatch Role name</td>
+						</tr>
+				</tbody></table>
+				<a href="#createnode-output" id="createnode-output" style="color: inherit; text-decoration: none;">
+					<h2>createNode output</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>id</td>
+							<td>string</td>
+							<td>EC2 instance ID</td>
+						</tr>
+						<tr>
+							<td>publicIp</td>
+							<td>string</td>
+							<td>Public IP</td>
+						</tr>
+						<tr>
+							<td>publicDns</td>
+							<td>string</td>
+							<td>Public DNS</td>
+						</tr>
+						<tr>
+							<td>sshPrivateKey</td>
+							<td>string</td>
+							<td>SSH private key</td>
+						</tr>
+						<tr>
+							<td>signerAddress</td>
+							<td>string</td>
+							<td>Validator address</td>
+						</tr>
+						<tr>
+							<td>signerPrivateKey?</td>
+							<td>string</td>
+							<td>Validator private key</td>
+						</tr>
+						<tr>
+							<td>availabilityZone</td>
+							<td>string</td>
+							<td>AWS AZ</td>
+						</tr>
+						<tr>
+							<td>instanceRunning</td>
+							<td>boolean</td>
+							<td>Whether instance running or not</td>
+						</tr>
+				</tbody></table>
+				<a href="#createendpoint-parameters" id="createendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+						<tr>
+							<td>networkAclGroupId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security group ID for ChainManager</td>
+						</tr>
+						<tr>
+							<td>sslCertArn</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ACM certification arn</td>
+						</tr>
+						<tr>
+							<td>hostedZoneId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Route53 hosted zone ID</td>
+						</tr>
+						<tr>
+							<td>endpointUuid</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Unique uuid for endpoint</td>
+						</tr>
+				</tbody></table>
+				<a href="#createendpoint-output" id="createendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>createEndpoint output</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>endpointUrls</td>
+							<td>string[]</td>
+							<td>List of endpoint URL</td>
+						</tr>
+						<tr>
+							<td>endpointBlockExplorerUrl</td>
+							<td>string</td>
+							<td>Blockscout URL</td>
+						</tr>
+				</tbody></table>
+				<a href="#createblockscout-parameters" id="createblockscout-parameters" style="color: inherit; text-decoration: none;">
+					<h2>createBlockscout parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointUrl</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Endpoint URL</td>
+						</tr>
+						<tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+						<tr>
+							<td>dataVolumeSize?</td>
+							<td>number</td>
+							<td>No</td>
+							<td>20</td>
+							<td>Disk volume size</td>
+						</tr>
+						<tr>
+							<td>imageId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 AMI ID</td>
+						</tr>
+						<tr>
+							<td>instanceType</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance size</td>
+						</tr>
+						<tr>
+							<td>networkAclGroupId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security group ID for ChainManager</td>
+						</tr>
+						<tr>
+							<td>cloudWatchProfileName</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Cloudwatch Role name</td>
+						</tr>
+				</tbody></table>
+				<a href="#createblockscout-output" id="createblockscout-output" style="color: inherit; text-decoration: none;">
+					<h2>createBlockscout output</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>publicIp</td>
+							<td>string</td>
+							<td>Public IP</td>
+						</tr>
+						<tr>
+							<td>publicDns</td>
+							<td>string</td>
+							<td>Public DNS</td>
+						</tr>
+						<tr>
+							<td>instanceId</td>
+							<td>string</td>
+							<td>EC2 instance ID</td>
+						</tr>
+						<tr>
+							<td>sshPrivateKey</td>
+							<td>string</td>
+							<td>SSH private key</td>
+						</tr>
+						<tr>
+							<td>availabilityZone</td>
+							<td>string</td>
+							<td>AWS AZ</td>
+						</tr>
+						<tr>
+							<td>instanceRunning</td>
+							<td>boolean</td>
+							<td>Whether instance running or not</td>
+						</tr>
+				</tbody></table>
+				<a href="#addnodetoendpoint-parameters" id="addnodetoendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>addNodeToEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>nodeInstanceId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#addnodetoendpoint-output" id="addnodetoendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>addNodeToEndpoint output</h2>
+				</a>
+				<p>none</p>
+				<a href="#addblockscouttoendpoint-parameters" id="addblockscouttoendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>addBlockscoutToEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>nodeInstanceId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+						<tr>
+							<td>instancePublicIp?</td>
+							<td>string</td>
+							<td>No</td>
+							<td>Public IP of instance</td>
+							<td>IP to collect blockchain data</td>
+						</tr>
+				</tbody></table>
+				<a href="#addblockscouttoendpoint-output" id="addblockscouttoendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>addBlockscoutToEndpoint output</h2>
+				</a>
+				<p>none</p>
+				<a href="#removenodefromendpoint-parameters" id="removenodefromendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>removeNodeFromEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>nodeInstanceId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#removenodefromendpoint-output" id="removenodefromendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>removeNodeFromEndpoint output</h2>
+				</a>
+				<p>none</p>
+				<a href="#removeblockscoutfromendpoint-parameters" id="removeblockscoutfromendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>removeBlockscoutFromEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>nodeInstanceId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+						<tr>
+							<td>instancePublicIp?</td>
+							<td>string</td>
+							<td>No</td>
+							<td>Public IP of instance</td>
+							<td>IP to collect blockchain data</td>
+						</tr>
+				</tbody></table>
+				<a href="#removeblockscoutfromendpoint-output" id="removeblockscoutfromendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>removeBlockscoutFromEndpoint output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deleteendpoint-parameters" id="deleteendpoint-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deleteEndpoint parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>endpointLoadBalancerId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>ELB load balancer ID</td>
+						</tr>
+						<tr>
+							<td>endpointUuid</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Unique uuid of endpoint</td>
+						</tr>
+						<tr>
+							<td>hostedZoneId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Route53 hosted zone ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#deleteendpoint-output" id="deleteendpoint-output" style="color: inherit; text-decoration: none;">
+					<h2>deleteEndpoint output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deletenode-parameters" id="deletenode-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deleteNode parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>nodeId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#deletenode-output" id="deletenode-output" style="color: inherit; text-decoration: none;">
+					<h2>deleteNode output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deleteblockscout-parameters" id="deleteblockscout-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deleteBlockscout parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>blockscoutInstanceId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>EC2 instance ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#deleteblockscout-output" id="deleteblockscout-output" style="color: inherit; text-decoration: none;">
+					<h2>deleteBlockscout output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deletepeertopeeracl-parameters" id="deletepeertopeeracl-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deletePeerToPeerAcl parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>aclGroup</td>
+							<td>IGUPeerToPeerAclInfo</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>List of security groups for P2P connection</td>
+						</tr>
+						<tr>
+							<td>tcp</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security geoup ID for TCP</td>
+						</tr>
+						<tr>
+							<td>udp</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security geoup ID for UDP</td>
+						</tr>
+				</tbody></table>
+				<a href="#deletepeertopeeracl-output" id="deletepeertopeeracl-output" style="color: inherit; text-decoration: none;">
+					<h2>deletePeerToPeerAcl output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deletenetworkacl-parameters" id="deletenetworkacl-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deleteNetworkAcl parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>aclGroupId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>Security geoup ID for ChainManager</td>
+						</tr>
+				</tbody></table>
+				<a href="#deletenetworkacl-output" id="deletenetworkacl-output" style="color: inherit; text-decoration: none;">
+					<h2>deleteNetworkAcl output</h2>
+				</a>
+				<p>none</p>
+				<a href="#deletevpc-parameters" id="deletevpc-parameters" style="color: inherit; text-decoration: none;">
+					<h2>deleteVpc parameters</h2>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Required</th>
+							<th>Default</th>
+							<th>Desciption</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>vpcId</td>
+							<td>string</td>
+							<td>Yes</td>
+							<td>-</td>
+							<td>VPC ID</td>
+						</tr>
+				</tbody></table>
+				<a href="#deletevpc-output" id="deletevpc-output" style="color: inherit; text-decoration: none;">
+					<h2>deleteVpc output</h2>
+				</a>
+				<p>none</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon.html">amazon</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_aws_cloud_config_builder.html">amazon/aws-<wbr>cloud-<wbr>config-<wbr>builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_blockscout_user_data_builder.html">amazon/blockscout-<wbr>user-<wbr>data-<wbr>builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_cloud_watch_user_data_builder.html">amazon/cloud-<wbr>watch-<wbr>user-<wbr>data-<wbr>builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_geth_clef_user_data_builder.html">amazon/geth-<wbr>clef-<wbr>user-<wbr>data-<wbr>builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_geth_user_data_builder.html">amazon/geth-<wbr>user-<wbr>data-<wbr>builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_lambda.html">amazon/lambda</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/amazon_policies.html">amazon/policies</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/base.html">base</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/ethereum_genesisjsonbuilder.html">ethereum/genesis<wbr>Json<wbr>Builder</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/provisioner.html">provisioner</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types.html">types</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
