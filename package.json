@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "gen:docs": "npm run typedoc && npm run staticrypt",
+    "typedoc": "typedoc",
+    "staticrypt": "PASSWORD=password SALT=60dea2db942696f39874da659d8ea17a sh scripts/encrypt-docs.sh"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/nguyenduyhust/github-action-testing/issues"
   },
-  "homepage": "https://github.com/nguyenduyhust/github-action-testing#readme"
+  "homepage": "https://github.com/nguyenduyhust/github-action-testing#readme",
+  "devDependencies": {
+    "staticrypt": "^2.4.0",
+    "typedoc": "^0.23.26",
+    "typescript": "^4.9.5"
+  }
 }

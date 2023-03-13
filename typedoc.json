@@ -1,0 +1,6 @@
+{
+  "name": "Github testing specification",
+  "includeVersion": true,
+  "entryPoints": ["./src"],
+  "out": "docs"
+}
